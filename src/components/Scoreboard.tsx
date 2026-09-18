@@ -74,10 +74,20 @@ export function Scoreboard({
       </form>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <Button variant="teamA" className="flex-1" disabled={busy} onClick={() => onDeclare("A")}>
+        <Button
+          variant="ghost"
+          className="flex-1"
+          disabled={busy}
+          onClick={() => onDeclare("A")}
+        >
           Side A takes the pot
         </Button>
-        <Button variant="teamB" className="flex-1" disabled={busy} onClick={() => onDeclare("B")}>
+        <Button
+          variant="ghost"
+          className="flex-1"
+          disabled={busy}
+          onClick={() => onDeclare("B")}
+        >
           Side B takes the pot
         </Button>
       </div>

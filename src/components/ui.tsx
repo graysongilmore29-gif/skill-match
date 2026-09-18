@@ -22,7 +22,7 @@ export function Button({
   };
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold tracking-wide transition disabled:cursor-not-allowed disabled:opacity-40 ${styles[variant]} ${className}`}
+      className={`inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold tracking-wide transition disabled:cursor-not-allowed disabled:opacity-40 ${styles[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -39,7 +39,7 @@ export function Panel({
 }) {
   return (
     <section
-      className={`rounded-2xl border border-line bg-panel/80 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)] ${className}`}
+      className={`rounded-xl border border-line bg-panel/80 p-4 shadow-[0_16px_48px_rgba(0,0,0,0.25)] ${className}`}
     >
       {children}
     </section>

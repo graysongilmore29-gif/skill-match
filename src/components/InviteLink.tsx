@@ -19,7 +19,7 @@ export function InviteLink({ code }: { code: string }) {
       <code className="flex-1 truncate rounded-lg border border-line bg-ink px-3 py-2 text-sm text-ice">
         {link || `/?join=${code}`}
       </code>
-      <Button type="button" variant="secondary" onClick={copy}>
+      <Button type="button" variant="ghost" onClick={copy}>
         {copied ? "Copied" : "Copy invite"}
       </Button>
     </div>

@@ -12,7 +12,12 @@ export function StartMatch({
   busy?: boolean;
 }) {
   return (
-    <Button onClick={onStart} disabled={!allFunded || busy} className="w-full">
+    <Button
+      onClick={onStart}
+      disabled={!allFunded || busy}
+      variant="primary"
+      className="w-full"
+    >
       {!allFunded
         ? "Start match (both sides must be funded)"
         : busy

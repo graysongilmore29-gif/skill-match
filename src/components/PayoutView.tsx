@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "./SessionProvider";
 import { matchAction } from "./useMatch";
@@ -36,9 +37,13 @@ function PayoutBody({
   const { refresh } = useSession();
   const { busy, error, run } = useBusy();
 
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
+
   return (
-    <div className="space-y-6">
-      <h1 className="font-display text-5xl uppercase tracking-wide">
+    <div className="space-y-4">
+      <h1 className="font-display text-4xl uppercase tracking-wide sm:text-5xl">
         Pot settled
       </h1>
       <StatusSteps current={match.status === "void" ? "settled" : match.status} />

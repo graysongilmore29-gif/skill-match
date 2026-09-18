@@ -13,8 +13,14 @@ export function ReadyButton({
   onReady: () => void;
   busy?: boolean;
 }) {
+  const canReady = rosterFull && !isReady;
   return (
-    <Button onClick={onReady} disabled={!rosterFull || isReady || busy} className="w-full">
+    <Button
+      onClick={onReady}
+      disabled={!canReady || busy}
+      variant={canReady ? "primary" : "ghost"}
+      className="w-full"
+    >
       {!rosterFull
         ? "Ready (full roster required)"
         : isReady

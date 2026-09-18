@@ -3,11 +3,23 @@
 import { useCallback, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import type { MatchDTO } from "@/lib/types";
+import { useSession } from "./SessionProvider";
 
 export function useMatch(id: string | null) {
-  const [match, setMatch] = useState<MatchDTO | null>(null);
+  const { applyWallet } = useSession();
+  const [match, setMatchState] = useState<MatchDTO | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(Boolean(id));
+
+  const setMatch = useCallback(
+    (next: MatchDTO) => {
+      setMatchState(next);
+      if (typeof applyWallet === "function") {
+        applyWallet(next.you.balanceCents);
+      }
+    },
+    [applyWallet],
+  );
 
   const refresh = useCallback(async () => {
     if (!id) return;
@@ -15,7 +27,7 @@ export function useMatch(id: string | null) {
     setMatch(data.match);
     setError(null);
     setLoading(false);
-  }, [id]);
+  }, [id, setMatch]);
 
   useEffect(() => {
     if (!id) return;

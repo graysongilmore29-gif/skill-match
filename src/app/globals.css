@@ -11,7 +11,7 @@
   --ice: #8fd7ff;
   --coral: #ff7a59;
   --team-a: #6ea8ff;
-  --team-b: #ffb25a;
+  --team-b: #ff6b8a;
 }
 
 @theme inline {
@@ -40,8 +40,8 @@ body {
   font-family: var(--font-dm), ui-sans-serif, system-ui, sans-serif;
   min-height: 100%;
   background-image:
-    radial-gradient(1200px 500px at 10% -10%, rgba(62, 224, 183, 0.12), transparent 55%),
-    radial-gradient(900px 420px at 110% 0%, rgba(110, 168, 255, 0.12), transparent 50%),
+    radial-gradient(1200px 480px at 8% -8%, rgba(62, 224, 183, 0.10), transparent 55%),
+    radial-gradient(880px 400px at 100% 0%, rgba(110, 168, 255, 0.10), transparent 50%),
     linear-gradient(180deg, #08111f 0%, #0a1628 100%);
 }
 
