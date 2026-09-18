@@ -23,7 +23,7 @@ export function PublicArticle({
       <div className="mt-10 space-y-10">{children}</div>
       <p className="mt-12 text-sm">
         <Link href="/" className="text-ice hover:underline">
-          Open the lobby
+          Back to lobby
         </Link>
       </p>
     </article>

@@ -20,10 +20,10 @@ Match states: `waiting` → `ready` → `in_match` → `settled` | `void`.
 | Path | Title | What it is |
 | --- | --- | --- |
 | `/` | Skill cash matches with friends | Lobby: mode toggle, create/join, roster, invite, fill randoms, ready |
-| `/how-it-works` | How skill prize matches work | Equal stakes, pot to winners, play-money until legal, FAQ |
-| `/skill-vs-slots` | Skill matches vs slot sites | Skill + teammates vs slot sites; no house games, no spin |
+| `/how-it-works` | How skill prize matches work | Mode, equal stake, play, rematch, FAQ |
+| `/vs-casino` | Skill matches vs slot sites | Skill + teammates vs slot sites; three-row contrast; create-match CTA |
 | `/match/[id]/wager` | Lock your stake | Stake, pot total, play-money balance, confirm, start |
-| `/match/[id]/play` | Match live | Score left, pot remaining right, declare/score stub, forfeit |
+| `/match/[id]/play` | Match live | Score left, pot remaining right (stacked on mobile), declare/score stub, forfeit |
 | `/match/[id]/payout` | Pot settled | Result, pot split, rematch |
 
 ## Run locally
