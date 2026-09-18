@@ -19,7 +19,7 @@ export function TopUpStub({
         Top up this simulated wallet to lock your stake. This is a stub — no
         real payments.
       </p>
-      <Button className="mt-4" variant="secondary" onClick={onTopUp} disabled={busy}>
+      <Button className="mt-4" onClick={onTopUp} disabled={busy}>
         {busy ? "Adding…" : `Top up ${formatPlayMoney(TOP_UP_CENTS)} play money`}
       </Button>
     </div>

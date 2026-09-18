@@ -17,7 +17,7 @@ import { RosterSlots } from "./RosterSlots";
 import { InviteLink } from "./InviteLink";
 import { FillRandoms } from "./FillRandoms";
 import { ReadyButton } from "./ReadyButton";
-import { ErrorNote, Panel, StatusSteps, useBusy } from "./ui";
+import { ErrorNote, Panel, StatusSteps, Button, useBusy } from "./ui";
 
 export function Lobby() {
   const { me, loading, refresh } = useSession();
@@ -149,14 +149,14 @@ function LobbyDesk({
         <p className="mt-4 text-sm text-muted">
           You have a {activeStatus.replace("_", " ")} match in progress.
         </p>
-        <button
-          className="mt-4 text-ice underline"
+        <Button
+          className="mt-4"
           onClick={() =>
             router.push(pathForStatus(activeMatchId, activeStatus as never))
           }
         >
           Continue match
-        </button>
+        </Button>
       </Panel>
     );
   }

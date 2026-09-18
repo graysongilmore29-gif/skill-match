@@ -8,7 +8,7 @@ export function Button({
   className = "",
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "danger" | "ghost" | "teamA" | "teamB";
+  variant?: "primary" | "secondary" | "danger" | "ghost";
 }) {
   const styles: Record<string, string> = {
     primary:
@@ -17,8 +17,6 @@ export function Button({
       "bg-panel text-text border border-line hover:border-ice/40 hover:bg-ink-2",
     danger: "bg-coral/15 text-coral border border-coral/40 hover:bg-coral/25",
     ghost: "bg-transparent text-muted hover:text-text hover:bg-white/5",
-    teamA: "bg-team-a text-ink hover:bg-team-a/90",
-    teamB: "bg-team-b text-ink hover:bg-team-b/90",
   };
   return (
     <button
