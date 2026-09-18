@@ -15,6 +15,7 @@ type SessionContextValue = {
   me: MeDTO | null;
   loading: boolean;
   refresh: () => Promise<void>;
+  applyWallet: (balanceCents: number) => void;
 };
 
 const SessionContext = createContext<SessionContextValue | null>(null);
@@ -47,7 +48,18 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  const value = useMemo(() => ({ me, loading, refresh }), [me, loading, refresh]);
+  const applyWallet = useCallback((balanceCents: number) => {
+    setMe((current) => {
+      if (!current?.user || !current.wallet) return current;
+      if (current.wallet.balanceCents === balanceCents) return current;
+      return { ...current, wallet: { balanceCents } };
+    });
+  }, []);
+
+  const value = useMemo(
+    () => ({ me, loading, refresh, applyWallet }),
+    [me, loading, refresh, applyWallet],
+  );
   return (
     <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "./SessionProvider";
 import { matchAction } from "./useMatch";
@@ -35,6 +36,10 @@ function PayoutBody({
   const router = useRouter();
   const { refresh } = useSession();
   const { busy, error, run } = useBusy();
+
+  useEffect(() => {
+    void refresh();
+  }, [refresh]);
 
   return (
     <div className="space-y-6">

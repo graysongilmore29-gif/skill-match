@@ -580,6 +580,7 @@ async function toMatchDTO(matchId: string, userId: string): Promise<MatchDTO> {
   if (!isMode(match.mode)) throw new AppError("Invalid match mode.");
   const you = match.players.find((player) => player.userId === userId);
   if (!you) throw new AppError("You are not on this roster.", 403);
+  const wallet = await prisma.wallet.findUnique({ where: { userId } });
 
   const players: PlayerDTO[] = match.players.map((player) => ({
     id: player.id,
@@ -628,6 +629,7 @@ async function toMatchDTO(matchId: string, userId: string): Promise<MatchDTO> {
       isReady: you.isReady,
       stakeLocked: you.stakeLocked,
       isHost: match.createdById === userId,
+      balanceCents: wallet?.balanceCents ?? 0,
     },
     slots,
     players,

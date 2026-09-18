@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "./session";
 
 export function jsonOk<T>(body: T, status = 200) {
-  return NextResponse.json(body, { status });
+  return NextResponse.json(body, {
+    status,
+    headers: { "Cache-Control": "no-store" },
+  });
 }
 
 export function jsonError(message: string, status = 400) {
