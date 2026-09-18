@@ -151,13 +151,15 @@ if (command === "build") {
     if (!postgres) {
       fail(`Vercel preview needs a hosted Postgres URL (SQLite is local-only).
 
-Add a Prisma Postgres database in the Vercel project:
+From the repo (after Vercel login): npm run preview:deploy
+
+Or in the dashboard:
   1. Open the project → Storage
   2. Create Database → Prisma Postgres (hobby is fine)
-  3. Connect it to this project (sets DATABASE_URL)
+  3. Connect Production and Preview (sets DATABASE_URL)
   4. Redeploy
 
-Or click the Deploy button in the README, which offers that database during setup.
+The README Deploy button also offers Prisma Postgres during setup.
 
 Local SQLite: npm run setup && npm run dev`);
     }

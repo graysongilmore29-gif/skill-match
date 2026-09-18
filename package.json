@@ -13,6 +13,7 @@
     "db:seed": "node scripts/prisma-run.mjs seed",
     "db:setup": "node scripts/prisma-run.mjs setup",
     "setup": "node scripts/ensure-env.mjs && npm run db:setup",
+    "preview:deploy": "node scripts/preview-deploy.mjs",
     "e2e:api": "node scripts/e2e-api.mjs",
     "postinstall": "node scripts/prisma-run.mjs generate"
   },
