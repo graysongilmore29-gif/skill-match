@@ -58,7 +58,7 @@ function PlayBody({
         />
       </div>
       <StatusSteps current={match.status} />
-      <div className="grid grid-cols-1 items-start gap-3 sm:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] sm:gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] items-start gap-3 md:gap-4">
         <section className="min-w-0">
           <Scoreboard
             match={match}
