@@ -23,7 +23,7 @@ export function Scoreboard({
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-2xl border border-team-a/40 bg-team-a/10 p-4 text-center">
           <div className="text-xs uppercase tracking-[0.16em] text-team-a">Side A</div>
-          <div className="font-display text-5xl">{match.teamAScore ?? "–"}</div>
+          <div className="font-display text-6xl leading-none">{match.teamAScore ?? "–"}</div>
           <p className="mt-2 text-xs text-muted">
             {match.players
               .filter((player) => player.team === "A")
@@ -33,7 +33,7 @@ export function Scoreboard({
         </div>
         <div className="rounded-2xl border border-team-b/40 bg-team-b/10 p-4 text-center">
           <div className="text-xs uppercase tracking-[0.16em] text-team-b">Side B</div>
-          <div className="font-display text-5xl">{match.teamBScore ?? "–"}</div>
+          <div className="font-display text-6xl leading-none">{match.teamBScore ?? "–"}</div>
           <p className="mt-2 text-xs text-muted">
             {match.players
               .filter((player) => player.team === "B")

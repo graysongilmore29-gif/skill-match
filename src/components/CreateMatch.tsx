@@ -15,7 +15,12 @@ export function CreateMatch({
   busy?: boolean;
 }) {
   return (
-    <Button onClick={onCreate} disabled={disabled || busy} className="w-full sm:w-auto">
+    <Button
+      onClick={onCreate}
+      disabled={disabled || busy}
+      variant={disabled ? "ghost" : "primary"}
+      className="w-full sm:w-auto"
+    >
       {busy ? "Creating…" : `Create ${mode} match`}
     </Button>
   );
