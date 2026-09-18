@@ -45,8 +45,8 @@ function PlayBody({
             Match live
           </h1>
           <p className="mt-2 text-sm text-muted">
-            {match.mode} skill contest. Enter a result or declare the winning
-            side — no live game engine in v0.
+            {match.mode} skill contest. v0 is a declare / score stub — no live
+            game engine yet.
           </p>
         </div>
         <Forfeit
@@ -59,27 +59,40 @@ function PlayBody({
         />
       </div>
       <StatusSteps current={match.status} />
-      <PotResidual potCents={match.potCents} />
-      <Scoreboard
-        match={match}
-        busy={busy}
-        onScore={(teamAScore, teamBScore) =>
-          run(async () => {
-            go(
-              await matchAction(match.id, {
-                action: "score",
-                teamAScore,
-                teamBScore,
-              }),
-            );
-          })
-        }
-        onDeclare={(team) =>
-          run(async () => {
-            go(await matchAction(match.id, { action: "declare", team }));
-          })
-        }
-      />
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1.35fr)_minmax(0,0.85fr)] items-start gap-3 md:gap-4">
+        <section className="min-w-0 space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ice">
+            Score
+          </p>
+          <Scoreboard
+            match={match}
+            busy={busy}
+            onScore={(teamAScore, teamBScore) =>
+              run(async () => {
+                go(
+                  await matchAction(match.id, {
+                    action: "score",
+                    teamAScore,
+                    teamBScore,
+                  }),
+                );
+              })
+            }
+            onDeclare={(team) =>
+              run(async () => {
+                go(await matchAction(match.id, { action: "declare", team }));
+              })
+            }
+          />
+        </section>
+        <aside className="min-w-0 space-y-3">
+          <PotResidual potCents={match.potCents} />
+          <p className="rounded-2xl border border-ice/25 bg-ice/5 px-3 py-3 text-xs leading-5 text-muted sm:px-4 sm:text-sm">
+            Record a score or declare a winning side to settle the pot. Play
+            stays a stub in v0.
+          </p>
+        </aside>
+      </div>
       <ErrorNote message={error} />
     </div>
   );

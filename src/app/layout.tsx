@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow_Condensed, DM_Sans } from "next/font/google";
 import { AppHeader } from "@/components/AppHeader";
 import { SessionProvider } from "@/components/SessionProvider";
+import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -34,10 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <SessionProvider>
           <AppHeader />
           <main className="flex-1">{children}</main>
-          <footer className="border-t border-line px-4 py-6 text-center text-xs text-muted">
-            v0 uses a simulated play-money wallet only. No real payments. Skill
-            contest prize matches — winners take the pot.
-          </footer>
+          <SiteFooter />
         </SessionProvider>
       </body>
     </html>
