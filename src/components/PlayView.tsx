@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { pathForStatus } from "@/lib/match-rules";
+import { useSession } from "./SessionProvider";
 import { matchAction } from "./useMatch";
 import { MatchStatusGuard, MatchViewFrame } from "./MatchStatusGuard";
 import { Scoreboard } from "./Scoreboard";
@@ -28,12 +29,15 @@ function PlayBody({
   setMatch: (match: MatchDTO) => void;
 }) {
   const router = useRouter();
+  const { refresh } = useSession();
   const { busy, error, run } = useBusy();
 
   function go(next: MatchDTO) {
     setMatch(next);
     if (next.status !== "in_match") {
-      router.push(pathForStatus(next.id, next.status));
+      void refresh().then(() => {
+        router.push(pathForStatus(next.id, next.status));
+      });
     }
   }
 

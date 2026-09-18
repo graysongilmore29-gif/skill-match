@@ -39,6 +39,7 @@ export type MatchDTO = {
     isReady: boolean;
     stakeLocked: boolean;
     isHost: boolean;
+    balanceCents: number;
   };
   slots: SlotDTO[];
   players: PlayerDTO[];
