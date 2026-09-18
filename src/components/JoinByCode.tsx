@@ -28,7 +28,7 @@ export function JoinByCode({
         aria-label="Invite code"
         autoComplete="off"
       />
-      <Button type="submit" variant="secondary" disabled={busy || code.trim().length < 4}>
+      <Button type="submit" variant="ghost" disabled={busy || code.trim().length < 4}>
         {busy ? "Joining…" : "Join"}
       </Button>
     </form>

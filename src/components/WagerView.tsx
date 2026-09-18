@@ -52,9 +52,9 @@ function WagerBody({
   const frozen = match.players.some((player) => player.stakeLocked);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <div>
-        <h1 className="font-display text-5xl uppercase tracking-wide">
+        <h1 className="font-display text-4xl uppercase tracking-wide sm:text-5xl">
           Lock your stake
         </h1>
         <p className="mt-2 text-sm text-muted">
@@ -100,17 +100,19 @@ function WagerBody({
           }
         />
       )}
-      <StartMatch
-        allFunded={match.allFunded}
-        busy={busy}
-        onStart={() =>
-          run(async () => {
-            const next = await matchAction(match.id, { action: "start" });
-            setMatch(next);
-            router.push(pathForStatus(next.id, next.status));
-          })
-        }
-      />
+      {match.you.stakeLocked ? (
+        <StartMatch
+          allFunded={match.allFunded}
+          busy={busy}
+          onStart={() =>
+            run(async () => {
+              const next = await matchAction(match.id, { action: "start" });
+              setMatch(next);
+              router.push(pathForStatus(next.id, next.status));
+            })
+          }
+        />
+      ) : null}
       <RosterSlots match={match} />
       <ErrorNote message={error} />
     </div>

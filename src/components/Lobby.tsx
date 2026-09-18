@@ -57,7 +57,7 @@ function Hero() {
       <p className="text-xs font-semibold uppercase tracking-[0.22em] text-mint">
         Skill cash matches with friends
       </p>
-      <h1 className="mt-3 font-display text-5xl uppercase leading-[0.95] tracking-wide text-text sm:text-6xl">
+      <h1 className="mt-4 font-display text-4xl uppercase leading-[0.95] tracking-wide text-text sm:text-6xl">
         Team up.
         <br />
         Stake the match.

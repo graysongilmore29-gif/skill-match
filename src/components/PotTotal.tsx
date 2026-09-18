@@ -8,7 +8,7 @@ export function PotTotal({ potCents }: { potCents: number }) {
       <div className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
         Pot total
       </div>
-      <div className="mt-1 font-display text-4xl uppercase tracking-wide text-mint">
+      <div className="mt-1 font-display text-6xl uppercase leading-none tracking-wide text-mint">
         {formatPlayMoney(potCents)}
       </div>
       <p className="mt-1 text-sm text-muted">

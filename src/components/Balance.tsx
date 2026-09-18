@@ -15,7 +15,7 @@ export function Balance({
         Play-money balance
       </div>
       <div
-        className={`mt-1 font-display text-3xl uppercase tracking-wide ${
+        className={`mt-1 font-display text-5xl uppercase leading-none tracking-wide ${
           insufficient ? "text-coral" : "text-text"
         }`}
       >

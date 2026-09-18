@@ -13,7 +13,7 @@ export function Forfeit({
   const [open, setOpen] = useState(false);
   return (
     <>
-      <Button variant="danger" onClick={() => setOpen(true)} disabled={busy}>
+      <Button variant="ghost" className="text-coral" onClick={() => setOpen(true)} disabled={busy}>
         Forfeit
       </Button>
       <Modal

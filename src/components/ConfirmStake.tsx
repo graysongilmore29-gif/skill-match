@@ -24,8 +24,8 @@ export function ConfirmStake({
     );
   }
   return (
-    <Button onClick={onConfirm} disabled={disabled || busy} className="w-full">
-      {busy ? "Locking…" : `Lock ${formatPlayMoney(stakeCents)} stake`}
+    <Button onClick={onConfirm} disabled={disabled || busy} className="w-full min-h-10">
+      {busy ? "Locking…" : "Lock stake"}
     </Button>
   );
 }

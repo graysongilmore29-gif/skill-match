@@ -49,7 +49,7 @@ export function MatchViewFrame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mx-auto max-w-5xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-5xl space-y-4 px-4 py-8">
       <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mint">
         {kicker}
       </p>
