@@ -6,6 +6,68 @@ US-first **skill-contest prize matches**. Team up, stake the match, winners take
 
 Each new account (including Continue as guest) starts with **$250.00 play money**.
 
+## Live preview
+
+**URL:** _pending — Grayson’s Vercel login is required once._
+
+Paste the `https://*.vercel.app` URL on the line above after the first successful deploy. This checkout has no `VERCEL_TOKEN`; `npx vercel whoami` returns `login_required`, so the URL cannot be minted from here.
+
+SQLite is local-only. Hosted preview uses a free **Prisma Postgres** store (play money still; no payment provider). `vercel.json` pins install/build/dev to the npm scripts below and deploys Next.js from `iad1` (US-first).
+
+### One command (from this repo)
+
+```bash
+npm run preview:deploy
+```
+
+That is `scripts/preview-deploy.mjs`: link or create the Vercel project, attach Prisma Postgres (`DATABASE_URL` on Production + Preview), connect this GitHub repo so later PRs get preview URLs, deploy, and print the `*.vercel.app` link.
+
+If the script stops for login, finish these clicks **once**, then re-run the same command:
+
+1. Open [vercel.com/login](https://vercel.com/login) and sign in with **GitHub** as the owner of `graysongilmore29-gif/skill-match`.
+2. In the project terminal run `npx vercel login` and complete the GitHub / email browser prompt.
+3. Re-run `npm run preview:deploy`.
+4. If the site itself asks for a Vercel password: project **Settings → Deployment Protection → Standard Protection → Off** (guest click-through must be public).
+5. Paste the printed `https://*.vercel.app` URL into this section and push.
+
+**Dashboard equivalent (still once):** [vercel.com/new](https://vercel.com/new) → Import **skill-match** (this GitHub repo, not a second clone) → Deploy (the first build may fail without Postgres — expected) → **Storage → Create Database → Prisma Postgres** (hobby) → Connect Production and Preview → **Deployments → Redeploy** → paste the URL here.
+
+Forks / other GitHub accounts can use the Deploy button (offers Prisma Postgres during setup):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/graysongilmore29-gif/skill-match&project-name=skill-match&repository-name=skill-match&stores=%5B%7B%22type%22%3A%22integration%22%2C%22integrationSlug%22%3A%22prisma%22%2C%22productSlug%22%3A%22prisma-postgres%22%2C%22protocol%22%3A%22storage%22%2C%22allowConnectExistingProduct%22%3Atrue%7D%5D)
+
+Accept the Prisma Postgres store when Vercel asks. Wait for the build, then open the preview URL.
+
+Once GitHub is connected, every push and every PR gets its own preview URL.
+
+### Secrets (only if you skip the Storage / integration step)
+
+There are **no payment keys**. v0 has no Stripe, no cash-out, no processors.
+
+| Variable | Local | Vercel preview / production |
+| --- | --- | --- |
+| `DATABASE_URL` | `file:./dev.db` via `.env.example` | **Required.** Prisma Postgres sets this when you connect Storage. A `postgres://…` URL from Neon or another host also works. |
+| `AUTH_SECRET` | Copied from `.env.example` | Optional for a private demo (the app has a fallback). Set any long random string if the URL is public. |
+
+Do not point preview at the SQLite file URL. The build will stop and tell you to attach Postgres.
+
+## Walk the demo as a guest (one browser)
+
+This is the lobby → wager → play → payout click-through. Use the Live preview URL, or [http://localhost:3000](http://localhost:3000) after local setup.
+
+1. Open the preview URL (or localhost).
+2. Leave **guest** selected and click **Continue as guest** (name optional).
+3. Leave mode on **1v1** and click **Create 1v1 match**.
+4. Click **Fill randoms** (empty-friends state — randoms auto-ready and lock play-money stakes).
+5. Click **Ready**. You land on **Lock your stake**.
+6. Click **Lock $10.00 stake**, then **Start match**.
+7. On **Match live**, click **Side A takes the pot** (or enter scores and **Record result**).
+8. On **Pot settled**, see the split. **Rematch 1v1** sends you back to the lobby roster.
+
+### Two real players
+
+Open two browsers (or a private window). Sign in as Alex and Jordan, create a match on one side, join with the invite code on the other.
+
 ## Run locally (copy-paste)
 
 You need [Node.js 22+](https://nodejs.org/) (this repo was built with Node 22). No Docker.
@@ -33,54 +95,6 @@ AUTH_SECRET="dev-skill-match-secret-change-me"
 ```
 
 To reset the local database later: delete `prisma/dev.db` and run `npm run db:setup` (or `npm run setup` again).
-
-### Walk the demo as a guest (one browser)
-
-This is the lobby → wager → play → payout click-through:
-
-1. Open [http://localhost:3000](http://localhost:3000).
-2. Leave **guest** selected and click **Continue as guest** (name optional).
-3. Leave mode on **1v1** and click **Create 1v1 match**.
-4. Click **Fill randoms** (empty-friends state — randoms auto-ready and lock play-money stakes).
-5. Click **Ready**. You land on **Lock your stake**.
-6. Click **Lock $10.00 stake**, then **Start match**.
-7. On **Match live**, click **Side A takes the pot** (or enter scores and **Record result**).
-8. On **Pot settled**, see the split. **Rematch 1v1** sends you back to the lobby roster.
-
-### Two real players
-
-Open two browsers (or a private window). Sign in as Alex and Jordan, create a match on one side, join with the invite code on the other.
-
-## Preview URL (Vercel, about two minutes)
-
-Next.js on Vercel is the one-click public preview. **SQLite is local-only** — serverless hosts cannot keep a file database between clicks, so preview uses a free Prisma Postgres store (play money still; no payment provider).
-
-### A. Already this GitHub repo (Grayson)
-
-1. Open [vercel.com/new](https://vercel.com/new) and sign in with GitHub.
-2. Import **skill-match**.
-3. Before or after the first deploy: project → **Storage** → **Create Database** → **Prisma Postgres** (hobby is fine) → **Connect** to Production and Preview. That sets `DATABASE_URL`.
-4. **Deployments → Redeploy** if the first build ran without a database.
-5. Open the `*.vercel.app` URL and walk the guest flow above.
-
-### B. Deploy button (clones the repo into your GitHub, offers the database)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/graysongilmore29-gif/skill-match&project-name=skill-match&repository-name=skill-match&stores=%5B%7B%22type%22%3A%22integration%22%2C%22integrationSlug%22%3A%22prisma%22%2C%22productSlug%22%3A%22prisma-postgres%22%7D%5D)
-
-Accept the Prisma Postgres store when Vercel asks. Wait for the build, then open the preview URL.
-
-`vercel.json` pins install/build/dev to the npm scripts below. GitHub integration: every push (and every PR) gets its own preview URL once the database is connected.
-
-### Secrets (only if you are not using the Storage button)
-
-There are **no payment keys**. v0 has no Stripe, no cash-out, no processors.
-
-| Variable | Local | Vercel preview / production |
-| --- | --- | --- |
-| `DATABASE_URL` | `file:./dev.db` via `.env.example` | **Required.** Prisma Postgres sets this when you connect Storage. A `postgres://…` URL from Neon or another host also works. |
-| `AUTH_SECRET` | Copied from `.env.example` | Optional for a private demo (the app has a fallback). Set any long random string if the URL is public. |
-
-Do not point preview at the SQLite file URL. The build will stop and tell you to attach Postgres.
 
 ## What you can do
 
@@ -115,6 +129,7 @@ These are the scripts in `package.json`:
 | `npm run db:generate` | Prisma client |
 | `npm run db:push` | Push schema (this repo uses `db push`, not `prisma migrate`) |
 | `npm run db:seed` | Demo players Alex and Jordan |
+| `npm run preview:deploy` | One-command Vercel preview (login + Prisma Postgres once) |
 | `npm run dev` | Next.js dev server at [http://localhost:3000](http://localhost:3000) |
 | `npm run test` | Pure match-rule tests |
 | `npm run e2e:api` | API happy-path against a running server (`npm run dev` in another terminal) |
