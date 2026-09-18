@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String         @id @default(cuid())
+  email          String         @unique
+  passwordHash   String?
+  displayName    String
+  isBot          Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  wallet         Wallet?
+  players        MatchPlayer[]
+  hostedMatches  Match[]        @relation("MatchHost")
+  ledger         LedgerEntry[]
+}
+
+model Wallet {
+  userId       String   @id
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  balanceCents Int      @default(25000)
+  updatedAt    DateTime @updatedAt
+}
+
+model Match {
+  id            String         @id @default(cuid())
+  code          String         @unique
+  mode          String
+  status        String         @default("waiting")
+  stakeCents    Int            @default(1000)
+  teamAScore    Int?
+  teamBScore    Int?
+  winningTeam   String?
+  voidReason    String?
+  forfeitedById String?
+  rematchOfId   String?
+  createdById   String
+  createdBy     User           @relation("MatchHost", fields: [createdById], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  players       MatchPlayer[]
+  ledger        LedgerEntry[]
+}
+
+model MatchPlayer {
+  id           String   @id @default(cuid())
+  matchId      String
+  match        Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  team         String
+  slot         Int
+  isReady      Boolean  @default(false)
+  stakeLocked  Boolean  @default(false)
+  isRandomFill Boolean  @default(false)
+  payoutCents  Int?
+  createdAt    DateTime @default(now())
+
+  @@unique([matchId, userId])
+  @@unique([matchId, team, slot])
+}
+
+model LedgerEntry {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matchId     String?
+  match       Match?   @relation(fields: [matchId], references: [id], onDelete: SetNull)
+  type        String
+  amountCents Int
+  note        String?
+  createdAt   DateTime @default(now())
+}
