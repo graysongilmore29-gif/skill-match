@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #08111f;
+  --ink-2: #0e1a30;
+  --panel: #13243f;
+  --line: #2a4063;
+  --text: #f3f7ff;
+  --muted: #97a8c8;
+  --mint: #3ee0b7;
+  --ice: #8fd7ff;
+  --coral: #ff7a59;
+  --team-a: #6ea8ff;
+  --team-b: #ffb25a;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-mint: var(--mint);
+  --color-ice: var(--ice);
+  --color-coral: var(--coral);
+  --color-team-a: var(--team-a);
+  --color-team-b: var(--team-b);
+  --font-sans: var(--font-dm);
+  --font-display: var(--font-barlow);
+}
+
+html,
+body {
+  background: var(--ink);
+  color: var(--text);
+}
+
+body {
+  font-family: var(--font-dm), ui-sans-serif, system-ui, sans-serif;
+  min-height: 100%;
+  background-image:
+    radial-gradient(1200px 500px at 10% -10%, rgba(62, 224, 183, 0.12), transparent 55%),
+    radial-gradient(900px 420px at 110% 0%, rgba(110, 168, 255, 0.12), transparent 50%),
+    linear-gradient(180deg, #08111f 0%, #0a1628 100%);
+}
+
+.font-display {
+  font-family: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+}
