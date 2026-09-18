@@ -20,7 +20,7 @@ export function Scoreboard({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-2xl border border-team-a/40 bg-team-a/10 p-4 text-center">
           <div className="text-xs uppercase tracking-[0.16em] text-team-a">Side A</div>
           <div className="font-display text-5xl">{match.teamAScore ?? "–"}</div>

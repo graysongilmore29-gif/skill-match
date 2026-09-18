@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { PUBLIC_NAV } from "./site-nav";
 import { api } from "@/lib/api";
 import { pathForStatus, type Mode } from "@/lib/match-rules";
 import type { MatchDTO } from "@/lib/types";
@@ -66,6 +68,17 @@ function Hero() {
         US-first skill-contest prize matches. 1v1, 2v2, or 3v3 — friends or
         random fill. v0 uses a simulated play-money wallet only.
       </p>
+      <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        {PUBLIC_NAV.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="text-ice hover:underline"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
