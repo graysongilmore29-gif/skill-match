@@ -1,13 +1,12 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { resolveAuthSecret } from "./env";
 import { prisma } from "./prisma";
 
 const COOKIE = "skill_match_session";
 
 function secretKey() {
-  return new TextEncoder().encode(
-    process.env.AUTH_SECRET || "dev-skill-match-secret-change-me",
-  );
+  return new TextEncoder().encode(resolveAuthSecret());
 }
 
 export async function createSession(userId: string) {
