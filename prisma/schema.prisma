@@ -2,6 +2,8 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// SQLite is the local default (`npm run setup`). Vercel builds swap this to
+// postgresql when DATABASE_URL is a Postgres URL — see scripts/prisma-run.mjs.
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")

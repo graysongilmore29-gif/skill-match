@@ -1,16 +1,18 @@
-import { writeFileSync, existsSync } from "node:fs";
+import { copyFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 
 const dest = resolve(process.cwd(), ".env");
+const example = resolve(process.cwd(), ".env.example");
+
 if (existsSync(dest)) {
   console.log(".env already exists");
   process.exit(0);
 }
 
-writeFileSync(
-  dest,
-  `DATABASE_URL="file:./dev.db"
-AUTH_SECRET="dev-skill-match-secret-change-me"
-`,
-);
-console.log("Wrote .env for local SQLite");
+if (!existsSync(example)) {
+  console.error("Missing .env.example");
+  process.exit(1);
+}
+
+copyFileSync(example, dest);
+console.log("Wrote .env from .env.example (local SQLite play-money demo)");
